@@ -10,4 +10,4 @@ RUN \
   genisoimage -l -r -o etc.iso etc && \
   genisoimage -l -r -o data.iso data
  
-CMD rumprun xen -d -i -W xennet0,inet,dhcp -b etc.iso,/etc -b data.iso,/data /usr/local/bin/nginx -- -c /data/conf/nginx.conf
+CMD rumprun qemu -i -I 'qnet0,vioif,-net tap,ifname=tap0' -W qnet0,inet,dhcp -b etc.iso,/etc -b data.iso,/data /usr/local/bin/nginx.hw_virtio -- -c /data/conf/nginx.conf
